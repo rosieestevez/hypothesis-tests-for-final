@@ -1,0 +1,79 @@
+---
+title: "Final Project; Hypothesis Tests"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Rosairi Estevez and Chris Lacroix
+## R Markdown
+
+### `HYPOTHESIS TESTS`
+**In this case we decided to exclude straight and don't know, only including people who identified as gay or lesbian, bisexual, or something else.**
+
+* 1) Do LGBT individuals who believe no children should need mental health resources have higher depression rates than individuals who believe all children need mental health resources?
+
+
+```{r}
+xtabs (~ d_SO_Down$MHLTH_NEED  + d_SO_Down$SEXUAL_ORIENTATION + d_SO_Down$DOWN)
+``` 
+
+
+`Group A: MHLTH_NEED = "NONE NEED"`
+n = 79/142 
+p1 = 55% of LGBTQ believing children do not need mental health resources feel depressed nearly every day.
+
+
+`Group B: MHLTH_NEED = "ALL NEED"`
+n = 44/142
+p2 = 31% of LGBTQ believing all children should need mental health resources feel depressed nearly every day. 
+
+p1 - p2 = 0.25 
+
+sig. level = p:0.05
+
+```{r}
+rm(list = ls())
+prop.test(x=c(79, 44), n=c(142, 142), alternative="two.sided", conf.level =0.95, correct = FALSE)
+```
+
+`Decision`: The null hypothesis is rejected, the sample difference in proportion (0.25) between the two groups is sig. and does not fit within the 95% region of acceptance [-0.115, 0.115].
+
+------------------------------------------------------------------------------------------------------
+
+2) Do LGBT individuals who believe no children should not get mental health resources have higher anxiety rates than individuals who believe all children should get mental health resources?
+
+
+```{r}
+xtabs(~ d_SO_Anxiety$MHLTH_GET + d_SO_Anxiety$SEXUAL_ORIENTATION + d_SO_Anxiety$ANXIOUS)
+```
+
+
+`Group A = ALL GET`
+n = 65/104
+p1 = 62% of LGBTQ believing all children should get mental health resources feel anxious nearly every day.
+
+`Group B = NONE GET`
+n = 26/104
+p2 = 25% of LGBTQ believing all children should not get mental health resources feel anxious nearly every day. 
+
+p1 - p2 = 0.38
+sig. level = p:0.05
+
+`Null Hypothesis: Group A = Group B`
+Both the all get and none get group will have equal rates of high anxiety rates.
+
+`Alt. Hypothesis: Group A ≠ Group B`
+The all get and none get group will NOT have equal rates of high anxiety rates. 
+
+```{r}
+rm(list = ls())
+prop.test(x=c(65, 26), n=c(104, 104), alternative="two.sided", conf.level =0.95, correct = FALSE)
+```
+
+`Decision` = null hypothesis is rejected due to the sample difference being large enough to be significant. The difference in proportion (0.38) does not fit in the 95% region of acceptance [-0.135, 0.135].
+
+
+
